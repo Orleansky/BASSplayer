@@ -1,0 +1,916 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>YouTubeMusicAPI</name>
+    </assembly>
+    <members>
+        <member name="T:YouTubeMusicAPI.Client.YouTubeMusicBase">
+            <summary>
+            Client for all low level YouTube Music API calls
+            </summary>
+        </member>
+        <member name="M:YouTubeMusicAPI.Client.YouTubeMusicBase.CreatePayload(System.String,System.String)">
+            <summary>
+            Creates a new YouTube Music request payload
+            </summary>
+            <param name="hostLanguage">The language for the payload</param>
+            <param name="geographicalLocation">The region for the payload</param>
+            <returns>The validated HTTP response data</returns>
+        </member>
+        <member name="M:YouTubeMusicAPI.Client.YouTubeMusicBase.#ctor">
+            <summary>
+            Creates a new base client
+            </summary>
+        </member>
+        <member name="M:YouTubeMusicAPI.Client.YouTubeMusicBase.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Creates a new base client with extendended logging functions
+            </summary>
+            <param name="logger">The optional logger used for logging</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Client.YouTubeMusicBase.SendRequestAsync(System.String,System.ValueTuple{System.String,System.Object}[],System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Sends a new request to the YouTube Music API with a payload
+            </summary>
+            <param name="apiPath">The specific API path for the request</param>
+            <param name="payloadItems">The items to add to the request payload</param>
+            <param name="hostLanguage">The language for the payload</param>
+            <param name="geographicalLocation">The region for the payload</param>
+            <param name="cancellationToken">The cancellation token to cancel the action</param>
+            <exception cref="T:System.NotSupportedException">May occurs when the json serialization fails</exception>
+            <exception cref="T:System.InvalidOperationException">May occurs when sending the web request fails</exception>
+            <exception cref="T:System.Net.Http.HttpRequestException">May occurs when sending the web request fails</exception>
+            <exception cref="T:System.Threading.Tasks.TaskCanceledException">Occurs when The task was cancelled</exception>
+            <returns>The json object containing the response data</returns>
+        </member>
+        <member name="T:YouTubeMusicAPI.Client.YouTubeMusicClient">
+            <summary>
+            Client for searching on YouTube Music
+            </summary>
+        </member>
+        <member name="M:YouTubeMusicAPI.Client.YouTubeMusicClient.#ctor">
+            <summary>
+            Creates a new search client
+            </summary>
+        </member>
+        <member name="M:YouTubeMusicAPI.Client.YouTubeMusicClient.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Creates a new search client with extendended logging functions
+            </summary>
+            <param name="logger">The optional logger used for logging</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Client.YouTubeMusicClient.GetShelfKind``1">
+            <summary>
+            Gets the shelf kind based on the type of the shelf item
+            </summary>
+            <typeparam name="IShelfItem">The requested shelf type</typeparam>
+            <returns>The shelf kind</returns>
+        </member>
+        <member name="M:YouTubeMusicAPI.Client.YouTubeMusicClient.Parse(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Parses a request response into shelf results
+            </summary>
+            <param name="requestResponse">The request response to parse</param>
+            <returns>An array of shelves containing all items</returns>
+            <exception cref="T:System.ArgumentNullException">Occurs when request response does not contain any shelves or some parsed item info is null</exception>
+        </member>
+        <member name="M:YouTubeMusicAPI.Client.YouTubeMusicClient.SearchAsync(System.String,System.Nullable{YouTubeMusicAPI.Types.ShelfKind},System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Searches for a query on YouTube Music
+            </summary>
+            <param name="query">The query to search for</param>
+            <param name="kind">The shelf kind of items to search for</param>
+            <param name="hostLanguage">The language for the payload</param>
+            <param name="geographicalLocation">The region for the payload</param>
+            <param name="cancellationToken">The cancellation token to cancel the action</param>
+            <returns>An array of shelves containing all search results</returns>
+            <exception cref="T:System.ArgumentNullException">Occurs when request response does not contain any shelves or some parsed item info is null</exception>
+            <exception cref="T:System.NotSupportedException">May occurs when the json serialization fails</exception>
+            <exception cref="T:System.InvalidOperationException">May occurs when sending the web request fails</exception>
+            <exception cref="T:System.Net.Http.HttpRequestException">May occurs when sending the web request fails</exception>
+            <exception cref="T:System.Threading.Tasks.TaskCanceledException">Occurs when The task was cancelled</exception>
+        </member>
+        <member name="M:YouTubeMusicAPI.Client.YouTubeMusicClient.SearchAsync``1(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Searches for a specfic shelf for a query on YouTube Music
+            </summary>
+            <param name="query">The query to search for</param>
+            <param name="hostLanguage">The language for the payload</param>
+            <param name="geographicalLocation">The region for the payload</param>
+            <param name="cancellationToken">The cancellation token to cancel the action</param>
+            <returns>An array of the specific shelf items</returns>
+            <exception cref="T:System.ArgumentNullException">Occurs when request response does not contain any shelves or some parsed item info is null</exception>
+            <exception cref="T:System.NotSupportedException">May occurs when the json serialization fails</exception>
+            <exception cref="T:System.InvalidOperationException">May occurs when sending the web request fails</exception>
+            <exception cref="T:System.Net.Http.HttpRequestException">May occurs when sending the web request fails</exception>
+            <exception cref="T:System.Threading.Tasks.TaskCanceledException">Occurs when The task was cancelled</exception>
+        </member>
+        <member name="T:YouTubeMusicAPI.Internal.RequestHelper">
+            <summary>
+            Helper which handles all HTTP requests
+            </summary>
+        </member>
+        <member name="M:YouTubeMusicAPI.Internal.RequestHelper.#ctor">
+            <summary>
+            Creates a new request helper
+            </summary>
+        </member>
+        <member name="M:YouTubeMusicAPI.Internal.RequestHelper.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Creates a new request helper with extendended logging functions
+            </summary>
+            <param name="logger">The optional logger used for logging</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Internal.RequestHelper.PostBodyAsync(System.String,System.Object,System.Threading.CancellationToken)">
+            <summary>
+            Sends a new POST request to the given uri with the serializes body
+            </summary>
+            <param name="url">The uri the request should be made to</param>
+            <param name="body">The body which should be serialized</param>
+            <param name="cancellationToken">The cancellation token to cancel the action</param>
+            <exception cref="T:System.NotSupportedException">May occurs when the json serialization fails</exception>
+            <exception cref="T:System.InvalidOperationException">May occurs when sending the web request fails</exception>
+            <exception cref="T:System.Net.Http.HttpRequestException">May occurs when sending the web request fails</exception>
+            <exception cref="T:System.Threading.Tasks.TaskCanceledException">Occurs when The task was cancelled</exception>
+            <returns>The HTTP response message</returns>
+        </member>
+        <member name="M:YouTubeMusicAPI.Internal.RequestHelper.PostBodyAndValidateAsync(System.String,System.Object,System.Threading.CancellationToken)">
+            <summary>
+            Sends a new POST request to the given uri with the serializes body and validates it
+            </summary>
+            <param name="uri">The uri the request should be made to</param>
+            <param name="body">The body which should be serialized</param>
+            <param name="cancellationToken">The cancellation token to cancel the action</param>
+            <exception cref="T:System.NotSupportedException">May occurs when the json serialization fails</exception>
+            <exception cref="T:System.InvalidOperationException">May occurs when sending the web request fails</exception>
+            <exception cref="T:System.Net.Http.HttpRequestException">May occurs when sending the web request fails</exception>
+            <exception cref="T:System.Threading.Tasks.TaskCanceledException">Occurs when The task was cancelled</exception>
+            <returns>The validated HTTP response data</returns>
+        </member>
+        <member name="T:YouTubeMusicAPI.Internal.ShelfItemParser">
+            <summary>
+            Contains methods to parse shelf items from json tokens
+            </summary>
+        </member>
+        <member name="M:YouTubeMusicAPI.Internal.ShelfItemParser.GetThumbnails(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            Parses thumbnails data from the json token
+            </summary>
+            <param name="jsonToken">The json token containing the item data</param>
+            <returns>An array of thumbnails</returns>
+        </member>
+        <member name="M:YouTubeMusicAPI.Internal.ShelfItemParser.GetUnknown(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            Parses data from the json token
+            </summary>
+            <param name="jsonToken">The json token containing the item data</param>
+            <returns>An unknown shelf item</returns>
+        </member>
+        <member name="M:YouTubeMusicAPI.Internal.ShelfItemParser.GetSong(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            Parses song data from the json token
+            </summary>
+            <param name="jsonToken">The json token containing the item data</param>
+            <returns>A shelf song</returns>
+            <exception cref="T:System.ArgumentNullException">Occurs when some parsed info is null</exception>
+        </member>
+        <member name="M:YouTubeMusicAPI.Internal.ShelfItemParser.GetVideo(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            Parses video data from the json token
+            </summary>
+            <param name="jsonToken">The json token containing the item data</param>
+            <returns>A shelf video</returns>
+            <exception cref="T:System.ArgumentNullException">Occurs when some parsed info is null</exception>
+        </member>
+        <member name="M:YouTubeMusicAPI.Internal.ShelfItemParser.GetAlbums(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            Parses album data from the json token
+            </summary>
+            <param name="jsonToken">The json token containing the item data</param>
+            <returns>A shelf album</returns>
+            <exception cref="T:System.ArgumentNullException">Occurs when some parsed info is null</exception>
+        </member>
+        <member name="M:YouTubeMusicAPI.Internal.ShelfItemParser.GetCommunityPlaylist(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            Parses community playlist data from the json token
+            </summary>
+            <param name="jsonToken">The json token containing the item data</param>
+            <returns>A shelf community playlist</returns>
+            <exception cref="T:System.ArgumentNullException">Occurs when some parsed info is null</exception>
+        </member>
+        <member name="M:YouTubeMusicAPI.Internal.ShelfItemParser.GetArtist(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            Parses artist data from the json token
+            </summary>
+            <param name="jsonToken">The json token containing the item data</param>
+            <returns>A shelf artist</returns>
+            <exception cref="T:System.ArgumentNullException">Occurs when some parsed info is null</exception>
+        </member>
+        <member name="M:YouTubeMusicAPI.Internal.ShelfItemParser.GetPodcast(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            Parses podcast data from the json token
+            </summary>
+            <param name="jsonToken">The json token containing the item data</param>
+            <returns>A shelf podcast</returns>
+            <exception cref="T:System.ArgumentNullException">Occurs when some parsed info is null</exception>
+        </member>
+        <member name="M:YouTubeMusicAPI.Internal.ShelfItemParser.GetEpisode(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            Parses podcast episode data from the json token
+            </summary>
+            <param name="jsonToken">The json token containing the item data</param>
+            <returns>A shelf podcast episode</returns>
+            <exception cref="T:System.ArgumentNullException">Occurs when some parsed info is null</exception>
+        </member>
+        <member name="M:YouTubeMusicAPI.Internal.ShelfItemParser.GetProfile(Newtonsoft.Json.Linq.JToken)">
+            <summary>
+            Parses profile data from the json token
+            </summary>
+            <param name="jsonToken">The json token containing the item data</param>
+            <returns>A shelf profile</returns>
+            <exception cref="T:System.ArgumentNullException">Occurs when some parsed info is null</exception>
+        </member>
+        <member name="T:YouTubeMusicAPI.Models.Album">
+            <summary>
+            Represents a YouTube Music album
+            </summary>
+            <param name="name">The name of this album</param>
+            <param name="id">The id of this album</param>
+            <param name="artists">The artists of this album</param>
+            <param name="year">The year of this album</param>
+            <param name="isSingle">Weither this album is a single or not</param>
+            <param name="radio">The radio channel of this album</param>
+            <param name="thumbnails">The thumbnails of this album</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Album.#ctor(System.String,System.String,YouTubeMusicAPI.Models.Shelf.ShelfItem[],System.Int32,System.Boolean,YouTubeMusicAPI.Models.Radio,YouTubeMusicAPI.Models.Thumbnail[])">
+            <summary>
+            Represents a YouTube Music album
+            </summary>
+            <param name="name">The name of this album</param>
+            <param name="id">The id of this album</param>
+            <param name="artists">The artists of this album</param>
+            <param name="year">The year of this album</param>
+            <param name="isSingle">Weither this album is a single or not</param>
+            <param name="radio">The radio channel of this album</param>
+            <param name="thumbnails">The thumbnails of this album</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Album.GetUrl(YouTubeMusicAPI.Models.Album)">
+            <summary>
+            Gets the url of this album which leads to YouTube music
+            </summary>
+            <param name="album">The album to get the url for </param>
+            <returns>An url of this album which leads to YouTube music</returns>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Album.Name">
+            <summary>
+            The name of this album
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Album.Id">
+            <summary>
+            The id of this album
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Album.Artists">
+            <summary>
+            The artists of this album
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Album.Year">
+            <summary>
+            The year of this album
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Album.IsSingle">
+            <summary>
+            Weither this album is a single or not
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Album.Radio">
+            <summary>
+            The radio channel of this album
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Album.Thumbnails">
+            <summary>
+            The thumbnails of this album
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Album.Kind">
+            <summary>
+            The kind of this shelf item
+            </summary>
+        </member>
+        <member name="T:YouTubeMusicAPI.Models.Artist">
+            <summary>
+            Represents a YouTube Music artist
+            </summary>
+            <param name="name">The name of this artist</param>
+            <param name="id">The id of this artist</param>
+            <param name="subscribersInfo">The subscribers info of this artist</param>
+            <param name="radio">The radio channel of this artist</param>
+            <param name="thumbnails">The thumbnails of this artist</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Artist.#ctor(System.String,System.String,System.String,YouTubeMusicAPI.Models.Radio,YouTubeMusicAPI.Models.Thumbnail[])">
+            <summary>
+            Represents a YouTube Music artist
+            </summary>
+            <param name="name">The name of this artist</param>
+            <param name="id">The id of this artist</param>
+            <param name="subscribersInfo">The subscribers info of this artist</param>
+            <param name="radio">The radio channel of this artist</param>
+            <param name="thumbnails">The thumbnails of this artist</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Artist.GetUrl(YouTubeMusicAPI.Models.Artist)">
+            <summary>
+            Gets the url of this artist which leads to YouTube music
+            </summary>
+            <param name="artist">The artist to get the url for </param>
+            <returns>An url of this artist which leads to YouTube music</returns>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Artist.Name">
+            <summary>
+            The name of this artist
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Artist.Id">
+            <summary>
+            The id of this artist
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Artist.SubscribersInfo">
+            <summary>
+            The subscribers info of this artist
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Artist.Radio">
+            <summary>
+            The radio channel of this artist
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Artist.Thumbnails">
+            <summary>
+            The thumbnails of this artist
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Artist.Kind">
+            <summary>
+            The kind of this shelf item
+            </summary>
+        </member>
+        <member name="T:YouTubeMusicAPI.Models.CommunityPlaylist">
+            <summary>
+            Represents a YouTube Music community playlist
+            </summary>
+            <param name="name">The name of this community playlist</param>
+            <param name="id">The id of this community playlist</param>
+            <param name="creator">The creator of this community playlist</param>
+            <param name="viewsInfo">The views info of this community playlist</param>
+            <param name="radio">The radio channel of this community playlist</param>
+            <param name="thumbnails">The thumbnails of this community playlist</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.CommunityPlaylist.#ctor(System.String,System.String,YouTubeMusicAPI.Models.Shelf.ShelfItem,System.String,YouTubeMusicAPI.Models.Radio,YouTubeMusicAPI.Models.Thumbnail[])">
+            <summary>
+            Represents a YouTube Music community playlist
+            </summary>
+            <param name="name">The name of this community playlist</param>
+            <param name="id">The id of this community playlist</param>
+            <param name="creator">The creator of this community playlist</param>
+            <param name="viewsInfo">The views info of this community playlist</param>
+            <param name="radio">The radio channel of this community playlist</param>
+            <param name="thumbnails">The thumbnails of this community playlist</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.CommunityPlaylist.GetUrl(YouTubeMusicAPI.Models.CommunityPlaylist)">
+            <summary>
+            Gets the url of this community playlist which leads to YouTube music
+            </summary>
+            <param name="communityPlaylist">The community playlist to get the url for </param>
+            <returns>An url of this community playlist which leads to YouTube music</returns>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.CommunityPlaylist.Name">
+            <summary>
+            The name of this community playlist
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.CommunityPlaylist.Id">
+            <summary>
+            The id of this community playlist
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.CommunityPlaylist.Creator">
+            <summary>
+            The creator of this community playlist
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.CommunityPlaylist.ViewsInfo">
+            <summary>
+            The views info of this community playlist
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.CommunityPlaylist.Radio">
+            <summary>
+            The radio channel of this community playlist
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.CommunityPlaylist.Thumbnails">
+            <summary>
+            The thumbnails of this community playlist
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.CommunityPlaylist.Kind">
+            <summary>
+            The kind of this shelf item
+            </summary>
+        </member>
+        <member name="T:YouTubeMusicAPI.Models.Episode">
+            <summary>
+            Represents a YouTube Music podcast episode
+            </summary>
+            <param name="name">The name of this podcast episode</param>
+            <param name="id">The id of this podcast episode</param>
+            <param name="podcast">The podcast of this podcast episode</param>
+            <param name="releasedAt">The date when this podcast episode was released</param>
+            <param name="isLikesAllowed">Weither likes for this podcast episode are allowed or not</param>
+            <param name="thumbnails">The thumbnails of this podcast episode</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Episode.#ctor(System.String,System.String,YouTubeMusicAPI.Models.Shelf.ShelfItem,System.DateTime,System.Boolean,YouTubeMusicAPI.Models.Thumbnail[])">
+            <summary>
+            Represents a YouTube Music podcast episode
+            </summary>
+            <param name="name">The name of this podcast episode</param>
+            <param name="id">The id of this podcast episode</param>
+            <param name="podcast">The podcast of this podcast episode</param>
+            <param name="releasedAt">The date when this podcast episode was released</param>
+            <param name="isLikesAllowed">Weither likes for this podcast episode are allowed or not</param>
+            <param name="thumbnails">The thumbnails of this podcast episode</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Episode.GetUrl(YouTubeMusicAPI.Models.Episode)">
+            <summary>
+            Gets the url of this podcast episode which leads to YouTube music
+            </summary>
+            <param name="episode">The podcast episode to get the url for </param>
+            <returns>An url of this podcast episode which leads to YouTube music</returns>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Episode.Name">
+            <summary>
+            The name of this podcast episode
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Episode.Id">
+            <summary>
+            The id of this podcast episode
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Episode.Podcast">
+            <summary>
+            The podcast of this podcast episode
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Episode.ReleasedAt">
+            <summary>
+            The date when this podcast episode was released
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Episode.IsLikesAllowed">
+            <summary>
+            Weither likes for this podcast episode are allowed or not
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Episode.Thumbnails">
+            <summary>
+            The thumbnails of this podcast episode
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Episode.Kind">
+            <summary>
+            The kind of this shelf item
+            </summary>
+        </member>
+        <member name="T:YouTubeMusicAPI.Models.Podcast">
+            <summary>
+            Represents a YouTube Music podcast
+            </summary>
+            <param name="name">The name of this podcast</param>
+            <param name="id">The id of this podcast</param>
+            <param name="host">The host of this podcast</param>
+            <param name="thumbnails">The thumbnails of this podcast</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Podcast.#ctor(System.String,System.String,YouTubeMusicAPI.Models.Shelf.ShelfItem,YouTubeMusicAPI.Models.Thumbnail[])">
+            <summary>
+            Represents a YouTube Music podcast
+            </summary>
+            <param name="name">The name of this podcast</param>
+            <param name="id">The id of this podcast</param>
+            <param name="host">The host of this podcast</param>
+            <param name="thumbnails">The thumbnails of this podcast</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Podcast.GetUrl(YouTubeMusicAPI.Models.Podcast)">
+            <summary>
+            Gets the url of this podcast which leads to YouTube music
+            </summary>
+            <param name="podcast">The podcast to get the url for </param>
+            <returns>An url of this podcast which leads to YouTube music</returns>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Podcast.Name">
+            <summary>
+            The name of this podcast
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Podcast.Id">
+            <summary>
+            The id of this podcast
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Podcast.Host">
+            <summary>
+            The host of this podcast
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Podcast.Thumbnails">
+            <summary>
+            The thumbnails of this podcast
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Podcast.Kind">
+            <summary>
+            The kind of this shelf item
+            </summary>
+        </member>
+        <member name="T:YouTubeMusicAPI.Models.Profile">
+            <summary>
+            Represents a YouTube Music profile
+            </summary>
+            <param name="name">The name of this profile</param>
+            <param name="id">The id of this profile</param>
+            <param name="handle">The handle of this profile</param>
+            <param name="thumbnails">The thumbnails of this profile</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Profile.#ctor(System.String,System.String,System.String,YouTubeMusicAPI.Models.Thumbnail[])">
+            <summary>
+            Represents a YouTube Music profile
+            </summary>
+            <param name="name">The name of this profile</param>
+            <param name="id">The id of this profile</param>
+            <param name="handle">The handle of this profile</param>
+            <param name="thumbnails">The thumbnails of this profile</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Profile.GetUrl(YouTubeMusicAPI.Models.Profile)">
+            <summary>
+            Gets the url of this profile which leads to YouTube music
+            </summary>
+            <param name="profile">The profile to get the url for </param>
+            <returns>An url of this profile which leads to YouTube music</returns>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Profile.Name">
+            <summary>
+            The name of this profile
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Profile.Id">
+            <summary>
+            The id of this profile
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Profile.Handle">
+            <summary>
+            The handle of this profile
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Profile.Thumbnails">
+            <summary>
+            The thumbnails of this profile
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Profile.Kind">
+            <summary>
+            The kind of this shelf item
+            </summary>
+        </member>
+        <member name="T:YouTubeMusicAPI.Models.Radio">
+            <summary>
+            Represents a YouTube Music radio channel
+            </summary>
+            <param name="playlistId">The id of the playlist associated with this radio channel</param>
+            <param name="videoId">The id of the starting video associated with this radio channel</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Radio.#ctor(System.String,System.String)">
+            <summary>
+            Represents a YouTube Music radio channel
+            </summary>
+            <param name="playlistId">The id of the playlist associated with this radio channel</param>
+            <param name="videoId">The id of the starting video associated with this radio channel</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Radio.GetUrl(YouTubeMusicAPI.Models.Radio)">
+            <summary>
+            Gets the url of this radio channel which leads to YouTube music
+            </summary>
+            <param name="radio">The radio channel to get the url for </param>
+            <returns>An url of this radio channel which leads to YouTube music</returns>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Radio.PlaylistId">
+            <summary>
+            The id of the playlist associated with this radio channel
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Radio.VideoId">
+            <summary>
+            The id of the starting video associated with this radio channel
+            </summary>
+        </member>
+        <member name="T:YouTubeMusicAPI.Models.Shelf.IShelfItem">
+            <summary>
+            Represents an unknown item in a YouTube Music shelf
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Shelf.IShelfItem.Name">
+            <summary>
+            The name of this item
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Shelf.IShelfItem.Id">
+            <summary>
+            The id of this item
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Shelf.IShelfItem.Kind">
+            <summary>
+            The kind of this shelf item
+            </summary>
+        </member>
+        <member name="T:YouTubeMusicAPI.Models.Shelf.Shelf">
+            <summary>
+            Represents a YouTube Music shelf
+            </summary>
+            <param name="query">The request query associated with this shelf</param>
+            <param name="params">The request params associated with this shelf</param>
+            <param name="items">The shelf items of this shelf</param>
+            <param name="kind">The kind of this shelf</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Shelf.Shelf.#ctor(System.String,System.String,YouTubeMusicAPI.Models.Shelf.IShelfItem[],YouTubeMusicAPI.Types.ShelfKind)">
+            <summary>
+            Represents a YouTube Music shelf
+            </summary>
+            <param name="query">The request query associated with this shelf</param>
+            <param name="params">The request params associated with this shelf</param>
+            <param name="items">The shelf items of this shelf</param>
+            <param name="kind">The kind of this shelf</param>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Shelf.Shelf.Query">
+            <summary>
+            The request query associated with this shelf
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Shelf.Shelf.Params">
+            <summary>
+            The request params associated with this shelf
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Shelf.Shelf.Items">
+            <summary>
+            The shelf items of this shelf
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Shelf.Shelf.Kind">
+            <summary>
+            The kind of this shelf
+            </summary>
+        </member>
+        <member name="T:YouTubeMusicAPI.Models.Shelf.ShelfItem">
+            <summary>
+            Represents an unknown item in a YouTube Music shelf
+            </summary>
+            <param name="name">The name of this item</param>
+            <param name="id">the id of this item</param>
+            <param name="kind">the kind of this shelf item</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Shelf.ShelfItem.#ctor(System.String,System.String,YouTubeMusicAPI.Types.ShelfKind)">
+            <summary>
+            Represents an unknown item in a YouTube Music shelf
+            </summary>
+            <param name="name">The name of this item</param>
+            <param name="id">the id of this item</param>
+            <param name="kind">the kind of this shelf item</param>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Shelf.ShelfItem.Name">
+            <summary>
+            The name of this item
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Shelf.ShelfItem.Id">
+            <summary>
+            The id of this item
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Shelf.ShelfItem.Kind">
+            <summary>
+            The kind of this shelf item
+            </summary>
+        </member>
+        <member name="T:YouTubeMusicAPI.Models.Song">
+            <summary>
+            Represents a YouTube Music song
+            </summary>
+            <param name="name">The name of this song</param>
+            <param name="id">The id of this song</param>
+            <param name="artists">The artists of this song</param>
+            <param name="album">The album of this song</param>
+            <param name="duration">The duration of this song</param>
+            <param name="isExplicit">Weither this song is explicit or not</param>
+            <param name="playsInfo">The plays Info of this song</param>
+            <param name="radio">The radio channel of this song</param>
+            <param name="thumbnails">The thumbnails of this song</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Song.#ctor(System.String,System.String,YouTubeMusicAPI.Models.Shelf.ShelfItem[],YouTubeMusicAPI.Models.Shelf.ShelfItem,System.TimeSpan,System.Boolean,System.String,YouTubeMusicAPI.Models.Radio,YouTubeMusicAPI.Models.Thumbnail[])">
+            <summary>
+            Represents a YouTube Music song
+            </summary>
+            <param name="name">The name of this song</param>
+            <param name="id">The id of this song</param>
+            <param name="artists">The artists of this song</param>
+            <param name="album">The album of this song</param>
+            <param name="duration">The duration of this song</param>
+            <param name="isExplicit">Weither this song is explicit or not</param>
+            <param name="playsInfo">The plays Info of this song</param>
+            <param name="radio">The radio channel of this song</param>
+            <param name="thumbnails">The thumbnails of this song</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Song.GetUrl(YouTubeMusicAPI.Models.Song)">
+            <summary>
+            Gets the url of this song which leads to YouTube music
+            </summary>
+            <param name="song">The song to get the url for </param>
+            <returns>An url of this song which leads to YouTube music</returns>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Song.Name">
+            <summary>
+            The name of this song
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Song.Id">
+            <summary>
+            The id of this song
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Song.Artists">
+            <summary>
+            The artist of this song
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Song.Album">
+            <summary>
+            The album of this song
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Song.Duration">
+            <summary>
+            The duration of this song
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Song.IsExplicit">
+            <summary>
+            Weither this song is explicit or not
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Song.PlaysInfo">
+            <summary>
+            The plays info of this song
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Song.Radio">
+            <summary>
+            The radio of this song
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Song.Thumbnails">
+            <summary>
+            The thumbnails of this song
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Song.Kind">
+            <summary>
+            The kind of this shelf item
+            </summary>
+        </member>
+        <member name="T:YouTubeMusicAPI.Models.Thumbnail">
+            <summary>
+            Represents a YouTube Music thumbnail image
+            </summary>
+            <param name="url">The url of this thumbnail image</param>
+            <param name="width">The pixels width of this thumbnail image</param>
+            <param name="height">The pixels height of this thumbnail image</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Thumbnail.#ctor(System.String,System.Int32,System.Int32)">
+            <summary>
+            Represents a YouTube Music thumbnail image
+            </summary>
+            <param name="url">The url of this thumbnail image</param>
+            <param name="width">The pixels width of this thumbnail image</param>
+            <param name="height">The pixels height of this thumbnail image</param>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Thumbnail.Url">
+            <summary>
+            The url of this thumbnail image
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Thumbnail.Width">
+            <summary>
+            The pixels width of this thumbnail image
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Thumbnail.Height">
+            <summary>
+            The pixels height of this thumbnail image
+            </summary>
+        </member>
+        <member name="T:YouTubeMusicAPI.Models.Video">
+            <summary>
+            Represents a YouTube Music video
+            </summary>
+            <param name="name">The name of this video</param>
+            <param name="id">The id of this video</param>
+            <param name="artist">The artist of this video</param>
+            <param name="duration">The duration of this video</param>
+            <param name="viewsInfo">The views info of this video</param>
+            <param name="radio">The radio of this video</param>
+            <param name="thumbnails">The thumbnails of this video</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Video.#ctor(System.String,System.String,YouTubeMusicAPI.Models.Shelf.ShelfItem,System.TimeSpan,System.String,YouTubeMusicAPI.Models.Radio,YouTubeMusicAPI.Models.Thumbnail[])">
+            <summary>
+            Represents a YouTube Music video
+            </summary>
+            <param name="name">The name of this video</param>
+            <param name="id">The id of this video</param>
+            <param name="artist">The artist of this video</param>
+            <param name="duration">The duration of this video</param>
+            <param name="viewsInfo">The views info of this video</param>
+            <param name="radio">The radio of this video</param>
+            <param name="thumbnails">The thumbnails of this video</param>
+        </member>
+        <member name="M:YouTubeMusicAPI.Models.Video.GetUrl(YouTubeMusicAPI.Models.Video)">
+            <summary>
+            Gets the url of this video which leads to YouTube music
+            </summary>
+            <param name="video">The video to get the url for </param>
+            <returns>An url of this video which leads to YouTube music</returns>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Video.Name">
+            <summary>
+            The name of this video
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Video.Id">
+            <summary>
+            The id of this video
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Video.Artist">
+            <summary>
+            The artist of this video
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Video.Duration">
+            <summary>
+            The duration of this video
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Video.ViewsInfo">
+            <summary>
+            The views info of this video
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Video.Radio">
+            <summary>
+            The radio of this video
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Video.Thumbnails">
+            <summary>
+            The thumbnails of this video
+            </summary>
+        </member>
+        <member name="P:YouTubeMusicAPI.Models.Video.Kind">
+            <summary>
+            The kind of this shelf item
+            </summary>
+        </member>
+        <member name="T:YouTubeMusicAPI.Types.Extensions">
+            <summary>
+            Contains extension methods for types
+            </summary>
+        </member>
+        <member name="M:YouTubeMusicAPI.Types.Extensions.ToParams(System.Nullable{YouTubeMusicAPI.Types.ShelfKind})">
+            <summary>
+            Converts search kind to YouTube Music request payload params
+            </summary>
+            <param name="kind">The shelf kind to convert</param>
+            <returns>A YouTube Music request payload params</returns>
+        </member>
+        <member name="M:YouTubeMusicAPI.Types.Extensions.ToShelfKind(System.String)">
+            <summary>
+            Converts string to shelf kind
+            </summary>
+            <param name="shelfKindString">The string to convert</param>
+            <returns>A ShelfKind enum value</returns>
+        </member>
+    </members>
+</doc>
